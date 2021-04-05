@@ -1,0 +1,777 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Documentation for our api ",
+        "description": "Node.js  Application API",
+        "license": {
+            "name": "CAP",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/",
+    "tags": [{
+            "name": "Users",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Roles",
+            "description": "API for roles in the system"
+        },
+        {
+            "name": "Categories",
+            "description": "API for categories in the system"
+        },
+        {
+            "name": "Types",
+            "description": "API for types in the system"
+        },
+        {
+            "name": "Annonces",
+            "description": "API for annonces  in the system"
+        }
+
+    ],
+    "schemes": [
+        "http"
+    ],
+
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "bearer"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Create new user in system",
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Login in system",
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "Use just email and password to login",
+                    "schema": {
+                        "$ref": "#/definitions/Login"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "login user success",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/current": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{userId}": {
+            "parameters": [{
+                "name": "userId",
+                "in": "path",
+                "required": true,
+                "description": "ID of user that we want to find",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "security": {
+                    "Bearer": {}
+                },
+                "summary": "Get user with given ID",
+                "responses": {
+                    "200": {
+                        "description": "User is found",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user with given ID",
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user with give ID",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [{
+                    "name": "user",
+                    "in": "body",
+                    "description": "User with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/role": {
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "description": "Create new role in system",
+                "parameters": [{
+                    "name": "role",
+                    "in": "body",
+                    "description": "Role that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Role"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New role is created",
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get all roles in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Roles"
+                        }
+                    }
+                }
+            }
+        },
+        "/role/{roleId}": {
+            "parameters": [{
+                "name": "roleId",
+                "in": "path",
+                "required": true,
+                "description": "ID of role that we want to find",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "security": {
+                    "Bearer": {}
+                },
+                "summary": "Get role with given ID",
+                "responses": {
+                    "200": {
+                        "description": "Role is found",
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete role with given ID",
+                "tags": [
+                    "Roles"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Role is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update role with give ID",
+                "tags": [
+                    "Roles"
+                ],
+                "parameters": [{
+                    "name": "role",
+                    "in": "body",
+                    "description": "Role with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Role"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Role is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Role"
+                        }
+                    }
+                }
+            }
+        },
+        "/categorie": {
+            "post": {
+                "tags": [
+                    "Categories"
+                ],
+                "description": "Create new categorie in system",
+                "parameters": [{
+                    "name": "categorie",
+                    "in": "body",
+                    "description": "Categorie that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Categorie"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New categorie is created",
+                        "schema": {
+                            "$ref": "#/definitions/Categorie"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Get all categories in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Categories"
+                        }
+                    }
+                }
+            }
+        },
+        "/categorie/{categorieId}": {
+            "parameters": [{
+                "name": "categorieId",
+                "in": "path",
+                "required": true,
+                "description": "ID of categorie that we want to find",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "security": {
+                    "Bearer": {}
+                },
+                "summary": "Get categorie with given ID",
+                "responses": {
+                    "200": {
+                        "description": "categorie is found",
+                        "schema": {
+                            "$ref": "#/definitions/Categorie"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete categorie with given ID",
+                "tags": [
+                    "Categories"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "categorie is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Categorie"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update categorie with give ID",
+                "tags": [
+                    "Categories"
+                ],
+                "parameters": [{
+                    "name": "categorie",
+                    "in": "body",
+                    "description": "Categorie with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Categorie"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Categorie is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Categorie"
+                        }
+                    }
+                }
+            }
+        },
+        "/type": {
+            "post": {
+                "tags": [
+                    "Types"
+                ],
+                "description": "Create new Type in system",
+                "parameters": [{
+                    "name": "type",
+                    "in": "body",
+                    "description": "Type that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Type"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Type is created",
+                        "schema": {
+                            "$ref": "#/definitions/Type"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Types"
+                ],
+                "summary": "Get all Types in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Types"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/{typeId}": {
+            "parameters": [{
+                "name": "typeId",
+                "in": "path",
+                "required": true,
+                "description": "ID of Type that we want to find",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Types"
+                ],
+                "security": {
+                    "Bearer": {}
+                },
+                "summary": "Get Type with given ID",
+                "responses": {
+                    "200": {
+                        "description": "Type is found",
+                        "schema": {
+                            "$ref": "#/definitions/Type"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Type with given ID",
+                "tags": [
+                    "Types"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Type is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Type"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Type with give ID",
+                "tags": [
+                    "Types"
+                ],
+                "parameters": [{
+                    "name": "type",
+                    "in": "body",
+                    "description": "Type with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Type"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Type is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Type"
+                        }
+                    }
+                }
+            }
+        },
+        "/annonce": {
+            "post": {
+                "tags": [
+                    "Annonces"
+                ],
+                "description": "Create new Annonce in system",
+                "parameters": [{
+                    "name": "type",
+                    "in": "body",
+                    "description": "Annonce that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Annonce"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Annonce is created",
+                        "schema": {
+                            "$ref": "#/definitions/Annonce"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Annonces"
+                ],
+                "summary": "Get all Annonces in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Annonces"
+                        }
+                    }
+                }
+            }
+        },
+        "/annonce/{typeId}": {
+            "parameters": [{
+                "name": "typeId",
+                "in": "path",
+                "required": true,
+                "description": "ID of Annonce that we want to find",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Annonces"
+                ],
+                "security": {
+                    "Bearer": {}
+                },
+                "summary": "Get Annonce with given ID",
+                "responses": {
+                    "200": {
+                        "description": "Annonce is found",
+                        "schema": {
+                            "$ref": "#/definitions/Annonce"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Annonce with given ID",
+                "tags": [
+                    "Annonces"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Annonce is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/Annonce"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update Annonce with give ID",
+                "tags": [
+                    "Annonces"
+                ],
+                "parameters": [{
+                    "name": "type",
+                    "in": "body",
+                    "description": "Annonce with new values of properties",
+                    "schema": {
+                        "$ref": "#/definitions/Annonce"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Annonce is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Annonce"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "email",
+                "password",
+                "name",
+                "role"
+
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true,
+                    "format": "email"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "date"
+                },
+                "matriculeFiscal": {
+                    "type": "string"
+                },
+                "telephone": {
+                    "type": "number"
+                },
+                "ville": {
+                    "type": "string"
+                },
+                "codePostal": {
+                    "type": "number"
+                },
+                "nomDiffusion": {
+                    "type": "string"
+                },
+                "website": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "object"
+                }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        },
+        "Role": {
+            "required": [
+
+                "name"
+
+
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "object"
+                }
+            }
+        },
+        "Roles": {
+            "type": "array",
+            "$ref": "#/definitions/Role"
+        },
+        "Categorie": {
+            "required": [
+                "name",
+                "description"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "categorie": {
+                    "type": "object"
+                }
+            }
+        },
+        "Categories": {
+            "type": "array",
+            "$ref": "#/definitions/Categorie"
+        },
+        "Login": {
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true,
+                    "format": "email"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Logins": {
+            "type": "array",
+            "$ref": "#/definitions/Login"
+        },
+        "Type": {
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "Types": {
+            "type": "array",
+            "$ref": "#/definitions/Type"
+        },
+        "Annonce": {
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "isActive": {
+                    "type": "Boolean"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "categorie": {
+                    "type": "array",
+                    "$ref": "#/definitions/Categorie"
+                },
+                "type": {
+                    "type": "object"
+                },
+                "file": {
+                    "type": "object"
+                },
+                "image": {
+                    "type": "object"
+
+                }
+            }
+
+        },
+        "Annonces": {
+            "type": "array",
+            "$ref": "#/definitions/Annonce"
+        }
+
+    }
+}
